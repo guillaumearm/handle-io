@@ -8,6 +8,7 @@
     "test": "NODE_ENV=test jest",
     "test:watch": "NODE_ENV=test jest --watch",
     "test:coverage": "NODE_ENV=test jest --coverage",
+    "test:update": "NODE_ENV=test jest --updateSnapshot",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
     "test:all": "npm run clean && npm run lint && npm run test",
