@@ -1,29 +1,29 @@
 const isEqual = require('lodash.isequal');
 const { stringify } = require('./utils')
 
-const createTestRunner = (mockedFxs = []) => {
+const createTestRunner = (mockedIOs = []) => {
   let mockIndex = 0;
-  return fx => {
-    if (!mockedFxs[mockIndex]) {
-      throw new Error('Mocked fxs should be exhaustive')
+  return io => {
+    if (!mockedIOs[mockIndex]) {
+      throw new Error('Mocked IOs should be exhaustive')
     }
-    const [expectedFx, mockedRetValue] = mockedFxs[mockIndex];
-    if (!isEqual(fx.f, expectedFx.f)) {
-      throw new Error(`Invalid fx#${mockIndex} function`)
+    const [expectedIO, mockedRetValue] = mockedIOs[mockIndex];
+    if (!isEqual(io.f, expectedIO.f)) {
+      throw new Error(`Invalid IO#${mockIndex} function`)
     }
-    if (!isEqual(fx.args, expectedFx.args)) {
-      const expectedArgs = stringify(expectedFx.args);
-      const fxArgs = stringify(fx.args);
-      throw new Error(`Invalid fx#${mockIndex} function arguments: expected \n${expectedArgs}\nbut got \n${fxArgs}`)
+    if (!isEqual(io.args, expectedIO.args)) {
+      const expectedArgs = stringify(expectedIO.args);
+      const ioArgs = stringify(io.args);
+      throw new Error(`Invalid IO#${mockIndex} function arguments: expected \n${expectedArgs}\nbut got \n${ioArgs}`)
     }
     mockIndex += 1;
     return mockedRetValue;
   }
 };
 
-const fxRunner = ({ f, args }) => f(...args);
+const ioRunner = ({ f, args }) => f(...args);
 
 module.exports = {
-  fxRunner,
+  ioRunner,
   createTestRunner,
 }

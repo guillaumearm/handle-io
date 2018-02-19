@@ -1,9 +1,9 @@
-const { fx, handler, testHandler } = require('./index');
+const { io, handler, testHandler } = require('./index');
 
-describe('fx-handler', () => {
+describe('handle-io', () => {
   describe('api', () => {
-    test('fx is a function', () => {
-      expect(typeof fx).toBe('function');
+    test('io is a function', () => {
+      expect(typeof io).toBe('function');
     });
     test('handler is a function', () => {
       expect(typeof handler).toBe('function');

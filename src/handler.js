@@ -1,14 +1,14 @@
-const { fxRunner } = require('./internal/runners');
+const { ioRunner } = require('./internal/runners');
 
-const createHandler = (fxGen, args) => {
-  const handlerObject = (...args) => createHandler(fxGen, args)
+const createHandler = (ioGen, args) => {
+  const handlerObject = (...args) => createHandler(ioGen, args)
   if (args) {
-    handlerObject.run = (runner = fxRunner) => {
-      const gen = fxGen(...args)
+    handlerObject.run = (runner = ioRunner) => {
+      const gen = ioGen(...args)
       let genResult = gen.next()
       while (!genResult.done) {
-        const { value: fx } = genResult
-        genResult = gen.next(fx.run(runner))
+        const { value: io } = genResult
+        genResult = gen.next(io.run(runner))
       }
       return genResult.value
     }
@@ -16,4 +16,4 @@ const createHandler = (fxGen, args) => {
   return handlerObject
 }
 
-module.exports = (fxGen) => createHandler(fxGen)
+module.exports = (ioGen) => createHandler(ioGen)

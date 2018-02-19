@@ -1,5 +1,5 @@
 module.exports = {
-  fx: require('./fx'),
+  io: require('./io'),
   handler: require('./handler'),
   testHandler: require('./testHandler'),
 }
