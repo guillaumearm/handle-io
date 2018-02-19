@@ -4,11 +4,10 @@ const createFx = (f, args) => {
   const fxObject = (...args) => createFx(f, args)
   fxObject.f = f;
   fxObject.args = args;
-  fxObject.run = (runner = fxRunner) => {
-    if (!args) {
-      throw new Error('FX must be applied')
+  if (args) {
+    fxObject.run = (runner = fxRunner) => {
+      return runner(fxObject)
     }
-    return runner(fxObject)
   }
   return fxObject
 }
