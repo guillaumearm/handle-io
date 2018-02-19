@@ -31,7 +31,7 @@ This piece of code is an assertion, an error will be throw if something go wrong
 io is just a wrapper for functions and arguments.
 In some way, it transforms impure functions into pure functions
 
-Conceptually, a io could be just :
+Conceptually, an io just could be :
 
 ```js
 const log = (...args) => [console.log, args];
@@ -59,7 +59,7 @@ log('Hello', 'World').run(); // print Hello World
 All the idea of this library is to apply **IOs** in structures called **handlers**.
 
 ### Handlers
-A **handler** is a wrapped pure [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) which just apply some **IOs** or **handlers**.
+A **handler** is a wrapped pure [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) which just apply some **IOs** and/or **handlers**.
 
 **e.g.**
 
@@ -115,5 +115,10 @@ And same as for **IOs**, don't use **.run()** everywhere in your codebase.
 
 **handlers** are combinable together : **you can yield a handler**.
 
+## Asynchronous code
+
+[WIP]
+
 ## API
+
 **[WIP]**
