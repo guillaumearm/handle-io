@@ -43,7 +43,7 @@
   },
   "homepage": "https://github.com/guillaumearm/handle-io",
   "engines": {
-    "node": ">=8.9.0"
+    "node": ">=6.0.0"
   },
   "devDependencies": {
     "commitizen": "^2.9.6",
