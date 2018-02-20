@@ -1,4 +1,4 @@
-const { stringify } = require('./utils')
+import { stringify } from './utils';
 
 describe('internal/utils', () => {
   describe('stringify', () => {

@@ -1,5 +1,5 @@
-const isEqual = require('lodash.isequal');
-const { createTestRunner } = require('./internal/runners');
+import isEqual from 'lodash.isequal';
+import { createTestRunner } from './internal/runners';
 
 const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = false) => {
   return {
@@ -27,4 +27,4 @@ const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = fals
   }
 }
 
-module.exports = handler => createTestHandler(handler)
+export default handler => createTestHandler(handler)

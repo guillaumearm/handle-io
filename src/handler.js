@@ -1,4 +1,4 @@
-const { ioRunner } = require('./internal/runners');
+import { ioRunner } from './internal/runners';
 
 const createHandler = (ioGen, args) => {
   const handlerObject = (...args) => createHandler(ioGen, args)
@@ -16,4 +16,4 @@ const createHandler = (ioGen, args) => {
   return handlerObject
 }
 
-module.exports = (ioGen) => createHandler(ioGen)
+export default (ioGen) => createHandler(ioGen)

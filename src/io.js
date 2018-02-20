@@ -1,4 +1,4 @@
-const { ioRunner } = require('./internal/runners');
+import { ioRunner } from './internal/runners';
 
 const createIo = (f, args) => {
   const ioObject = (...args) => createIo(f, args)
@@ -12,4 +12,4 @@ const createIo = (f, args) => {
   return ioObject;
 }
 
-module.exports = (f) => createIo(f, null);
+export default (f) => createIo(f, null);

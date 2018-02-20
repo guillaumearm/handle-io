@@ -1,5 +1,15 @@
-module.exports = {
-  io: require('./io'),
-  handler: require('./handler'),
-  testHandler: require('./testHandler'),
+import io from './io';
+import handler from './handler';
+import testHandler from './testHandler';
+
+export {
+  io,
+  handler,
+  testHandler,
 }
+
+// export default {
+//   io,
+//   handler,
+//   testHandler,
+// }
