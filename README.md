@@ -31,7 +31,7 @@ This piece of code is an assertion, an error will be throw if something go wrong
 
 # Getting started
 
-## Install (not publish on npm)
+## Install (not published on npm yet)
 
 ```js
 npm install --save guillaumearm/handle-io.git
