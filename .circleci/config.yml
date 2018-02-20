@@ -1,12 +1,14 @@
 # handle-io circleci configuration file
-#
+
 version: 2
 jobs:
-  build:
+  test_node_6:
     docker:
-      - image: circleci/node:8.9.0
+      - image: circleci/node:6
 
-    working_directory: ~/handle-io
+    filters:
+      branches:
+        ignore: gh-pages
 
     steps:
       - checkout
@@ -14,16 +16,109 @@ jobs:
       # Download and cache dependencies
       - restore_cache:
           keys:
-          - handle-io-dependencies-{{ checksum "package-lock.json" }}
+          - handle-io-dependencies-node6-{{ checksum "package-lock.json" }}
           # fallback to using the latest cache if no exact match is found
-          - handle-io-dependencies-
+          - handle-io-dependencies-node6-
 
       - run: npm install
 
       - save_cache:
           paths:
             - node_modules
-          key: handle-io-dependencies-{{ checksum "package-lock.json" }}
+          key: handle-io-dependencies-node6-{{ checksum "package-lock.json" }}
 
       # run tests!
       - run: npm run test:all
+
+  test_node_7:
+    docker:
+      - image: circleci/node:7
+
+    filters:
+      branches:
+        ignore: gh-pages
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - handle-io-dependencies-node7-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - handle-io-dependencies-node7-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: handle-io-dependencies-node7-{{ checksum "package-lock.json" }}
+
+      # run tests!
+      - run: npm run test:all
+
+  test_node_8:
+    docker:
+      - image: circleci/node:8
+
+    filters:
+      branches:
+        ignore: gh-pages
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - handle-io-dependencies-node8-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - handle-io-dependencies-node8-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: handle-io-dependencies-node8-{{ checksum "package-lock.json" }}
+
+      # run tests!
+      - run: npm run test:all
+
+  test_node_9:
+    docker:
+      - image: circleci/node:9
+
+    filters:
+      branches:
+        ignore: gh-pages
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - handle-io-dependencies-node9-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run tests!
+      - run: npm run test:all
+
+workflows:
+  version: 2
+  test:
+    jobs:
+      - test_node_6
+      - test_node_7
+      - test_node_8
+      - test_node_9
