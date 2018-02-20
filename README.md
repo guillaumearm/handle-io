@@ -1,10 +1,9 @@
-handle-io [WIP]
+handle-io :wrench: :sparkles: *[WIP]*
 ===============
 
-Wrap side effects, combine them, and make this combination testable
+Highly inspired by [funkia/io](https://github.com/funkia/io) and [redux-saga](https://github.com/redux-saga/redux-saga), this library intends to wrap small pieces of impure code, orchestrates and test them.
 
 ## Purpose
-Highly inspired by [funkia/io](https://github.com/funkia/io) and [redux-saga](https://github.com/redux-saga/redux-saga), this library intends to wrap small pieces of impure code, orchestrates and test them.
 
 ### Test side effects orchestration without pain
 
@@ -24,9 +23,13 @@ This piece of code is an assertion, an error will be throw if something go wrong
 
 # Getting started
 
-## Installation
-[WIP]
-### IOs
+## Install (not publish on npm)
+
+```js
+npm install --save guillaumearm/handle-io.git
+```
+
+### IO
 
 io is just a wrapper for functions and arguments.
 In some way, it transforms impure functions into pure functions
@@ -56,10 +59,10 @@ log('Hello', 'World').run(); // print Hello World
 
 **keep it mind** : piece of codes with `.run()` cannot be tested properly.
 
-All the idea of this library is to apply **IOs** in structures called **handlers**.
+All the idea of this library is to apply **IO** in structures called **handlers**.
 
 ### Handlers
-A **handler** is a wrapped pure [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) which just apply some **IOs** and/or **handlers**.
+A **handler** is a wrapped pure [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) which just apply some **IO** and/or **handlers**.
 
 **e.g.**
 
@@ -78,7 +81,7 @@ const logTwice = handler(function*(...args) {
 
 Write a test for this **handler** is very simple (please see first example above).
 
-But what about test a **handler** which apply **IOs** and return values ?
+But what about test a **handler** which apply **IO** and return values ?
 
 **There is a very simple way** :
 - using second argument of .matchIo() method to mock returned values.
@@ -105,20 +108,24 @@ testHandler(addValues())
 ```
 
 #### Run handlers
-Same as for **IOs**, there is a **.run()** method :
+Same as for **IO**, there is a **.run()** method :
 
 ```js
 addValues().run() // => 42
 ```
 
-And same as for **IOs**, don't use **.run()** everywhere in your codebase.
+And same as for **IO**, don't use **.run()** everywhere in your codebase.
 
 **handlers** are combinable together : **you can yield a handler**.
 
 ## Asynchronous code
 
-[WIP]
+*[WIP]*
+
+## Errors
+
+*[WIP]*
 
 ## API
 
-**[WIP]**
+*[WIP]*
