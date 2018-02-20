@@ -28,7 +28,11 @@
     "testing-io",
     "testable"
   ],
-  "author": "Guillaume ARM",
+  "author": {
+    "name": "Guillaume ARM",
+    "email": "trapcodien@gmail.com",
+    "url": "https://github.com/guillaumearm"
+  },
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -37,7 +41,7 @@
   "bugs": {
     "url": "https://github.com/guillaumearm/handle-io/issues"
   },
-  "homepage": "https://github.com/guillaumearm/handle-io#readme",
+  "homepage": "https://github.com/guillaumearm/handle-io",
   "engines": {
     "node": ">=8.9.0"
   },
