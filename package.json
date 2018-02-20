@@ -5,6 +5,12 @@
   "main": "lib/handle-io.js",
   "module": "es/handle-io.js",
   "jsnext:main": "es/handle-io.js",
+  "files": [
+    "dist",
+    "lib",
+    "es",
+    "src"
+  ],
   "scripts": {
     "clean": "rimraf lib es dist",
     "build": "npm run build:es && npm run build:cjs && npm run build:umd",
