@@ -1,0 +1,29 @@
+# handle-io circleci configuration file
+#
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.9.0
+
+    working_directory: ~/handle-io
+
+    steps:
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - handle-io-dependencies-{{ checksum "package-lock.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - handle-io-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: handle-io-dependencies-{{ checksum "package-lock.json" }}
+
+      # run tests!
+      - run: npm run test:all
