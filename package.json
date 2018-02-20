@@ -12,7 +12,7 @@
     "src"
   ],
   "scripts": {
-    "clean": "rimraf lib es dist",
+    "clean": "rimraf lib es dist coverage",
     "build": "npm run build:es && npm run build:cjs && npm run build:umd",
     "build:cjs": "OUTPUT_FORMAT=cjs rollup -c -o lib/handle-io.js",
     "build:es": "OUTPUT_FORMAT=es rollup -c -o es/handle-io.js",
