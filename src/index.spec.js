@@ -1,4 +1,4 @@
-const { io, handler, testHandler } = require('./index');
+import { io, handler, testHandler } from './index';
 
 describe('handle-io', () => {
   describe('api', () => {

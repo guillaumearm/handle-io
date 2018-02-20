@@ -1,7 +1,7 @@
-const isEqual = require('lodash.isequal');
-const { stringify } = require('./utils')
+import isEqual from 'lodash.isequal';
+import { stringify } from './utils';
 
-const createTestRunner = (mockedIOs = []) => {
+export const createTestRunner = (mockedIOs = []) => {
   let mockIndex = 0;
   return io => {
     if (!mockedIOs[mockIndex]) {
@@ -21,9 +21,4 @@ const createTestRunner = (mockedIOs = []) => {
   }
 };
 
-const ioRunner = ({ f, args }) => f(...args);
-
-module.exports = {
-  ioRunner,
-  createTestRunner,
-}
+export const ioRunner = ({ f, args }) => f(...args);
