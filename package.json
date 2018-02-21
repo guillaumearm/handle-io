@@ -76,6 +76,8 @@
     "jest": "^22.3.0",
     "nodemon": "^1.14.12",
     "nsp": "^3.2.1",
+    "ramda": "^0.25.0",
+    "ramda-adjunct": "^2.5.0",
     "rimraf": "^2.6.2",
     "rollup": "^0.56.2",
     "rollup-plugin-commonjs": "^8.3.0",
