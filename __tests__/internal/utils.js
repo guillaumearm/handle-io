@@ -1,4 +1,4 @@
-import { stringify } from './utils';
+import { stringify } from '../../src/internal/utils';
 
 describe('internal/utils', () => {
   describe('stringify', () => {
