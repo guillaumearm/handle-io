@@ -1,4 +1,4 @@
-import { ioRunner } from './internal/runners';
+import ioRunner from './internal/ioRunner';
 
 const createIo = (f, args) => {
   const ioObject = (...args) => createIo(f, args)
