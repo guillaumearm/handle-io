@@ -1,26 +1,26 @@
-const testHandleIoApi = (handleApi) => {
+const testHandleIo = (handleIo) => {
   test('should expose handle-io api', () => {
-    const { io, handler, testHandler } = handleApi;
+    const { io, handler, testHandler } = handleIo;
     expect(typeof io).toBe('function');
     expect(typeof handler).toBe('function');
     expect(typeof testHandler).toBe('function');
-    expect(Object.keys(handleApi)).toEqual(['io', 'handler', 'testHandler']);
+    expect(Object.keys(handleIo)).toEqual(['io', 'handler', 'testHandler']);
   });
 }
 
-describe('packages', () => {
+describe('integration', () => {
   describe('commonjs', () => {
     // eslint-disable-next-line node/no-missing-require
-    testHandleIoApi(require('../lib/handle-io.js'));
+    testHandleIo(require('../lib/handle-io.js'));
   });
 
   describe('es module', () => {
     // eslint-disable-next-line node/no-missing-require
-    testHandleIoApi(require('../es/handle-io.js'));
+    testHandleIo(require('../es/handle-io.js'));
   });
 
   describe('umd module', () => {
     // eslint-disable-next-line node/no-missing-require
-    testHandleIoApi(require('../dist/handle-io.js'));
+    testHandleIo(require('../dist/handle-io.js'));
   });
 });
