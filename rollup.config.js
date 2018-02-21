@@ -2,13 +2,18 @@
 import commonjs from 'rollup-plugin-commonjs';
 import nodeResolve from 'rollup-plugin-node-resolve';
 
-const OUTPUT_FORMAT = process.env.OUTPUT_FORMAT || 'es'
+const outputs = [
+  { format: 'cjs', outputFolder: 'lib' },
+  { format: 'es', outputFolder: 'es' },
+  { format: 'umd', outputFolder: 'dist' },
+];
 
-export default {
-  input: 'src/index.js',
+export default outputs.map(({ format, outputFolder }) => ({
+  input: `src/index.js`,
   output: {
     name: 'HandleIO',
-    format: OUTPUT_FORMAT,
+    format,
+    file: `${outputFolder}/handle-io.js`,
   },
   plugins: [
     nodeResolve({
@@ -22,4 +27,4 @@ export default {
       extensions: [ '.js' ],
     })
   ]
-};
+}))
