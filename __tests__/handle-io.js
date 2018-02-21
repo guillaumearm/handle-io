@@ -1,4 +1,4 @@
-import { io, handler, testHandler } from './index';
+import { io, handler, testHandler } from '../src';
 
 describe('handle-io', () => {
   describe('api', () => {

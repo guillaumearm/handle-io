@@ -1,4 +1,4 @@
-describe('generator test', () => {
+describe('es6 generator test', () => {
   test('es6 generators functions should work', () => {
     const gen = function*(){
       return yield 42;

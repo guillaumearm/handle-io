@@ -16,22 +16,6 @@
     "plugin:import/errors",
     "plugin:import/warnings"
   ],
-  "overrides": [
-    {
-      "files": ["*.spec.js", "*.test.js"],
-      "plugins": ["jest"],
-      "env": {
-        "jest/globals": true,
-      },
-      "rules": {
-        "jest/no-disabled-tests": "warn",
-        "jest/no-focused-tests": "error",
-        "jest/no-identical-title": "error",
-        "jest/prefer-to-have-length": "warn",
-        "jest/valid-expect": "error"
-      },
-    },
-  ],
   "rules": {
     "node/no-unsupported-features": 0,
     "no-var": "error",

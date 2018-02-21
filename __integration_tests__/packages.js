@@ -6,25 +6,25 @@ const testHandleApi = (handleApi) => {
   expect(Object.keys(handleApi)).toEqual(['io', 'handler', 'testHandler']);
 }
 
-describe('test bundles', () => {
+describe('packages', () => {
   describe('commonjs', () => {
     test('should expose handle-io api', () => {
       // eslint-disable-next-line node/no-missing-require
-      testHandleApi(require('./lib/handle-io.js'));
+      testHandleApi(require('../lib/handle-io.js'));
     })
   });
 
   describe('es module', () => {
     test('should expose handle-io api', () => {
       // eslint-disable-next-line node/no-missing-require
-      testHandleApi(require('./es/handle-io.js'));
+      testHandleApi(require('../es/handle-io.js'));
     })
   });
 
   describe('umd module', () => {
     test('should expose handle-io api', () => {
       // eslint-disable-next-line node/no-missing-require
-      testHandleApi(require('./dist/handle-io.js'));
+      testHandleApi(require('../dist/handle-io.js'));
     })
   });
 });
