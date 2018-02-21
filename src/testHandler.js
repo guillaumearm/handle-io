@@ -1,5 +1,5 @@
 import isEqual from 'lodash.isequal';
-import { createTestRunner } from './internal/runners';
+import { stringify } from './internal/utils';
 
 const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = false) => {
   return {
@@ -16,8 +16,24 @@ const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = fals
         throw new Error('Handler should be a function')
       }
 
-      // 2. run handler using testRunner to get a retValue
-      const retValue = h.run(createTestRunner(mockedIOs))
+      // 2. run handler using a custom runner to get a retValue
+      let mockIndex = 0;
+      const retValue = h.run((io) => {
+        if (!mockedIOs[mockIndex]) {
+          throw new Error('Too much runned io')
+        }
+        const [expectedIO, mockedRetValue] = mockedIOs[mockIndex];
+        if (!isEqual(io.f, expectedIO.f)) {
+          throw new Error(`Invalid IO#${mockIndex} function`)
+        }
+        if (!isEqual(io.args, expectedIO.args)) {
+          const expectedArgs = stringify(expectedIO.args);
+          const ioArgs = stringify(io.args);
+          throw new Error(`Invalid IO#${mockIndex} function arguments: expected \n${expectedArgs}\nbut got \n${ioArgs}`)
+        }
+        mockIndex += 1;
+        return mockedRetValue;
+      })
 
       // 3. expectedRetValue and retValue should be equal
       if (assertRet && !isEqual(expectedRetValue, retValue)) {

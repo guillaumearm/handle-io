@@ -1,4 +1,4 @@
-import { ioRunner } from './internal/runners';
+import ioRunner from './internal/ioRunner';
 
 const createHandler = (ioGen, args) => {
   const handlerObject = (...args) => createHandler(ioGen, args)
