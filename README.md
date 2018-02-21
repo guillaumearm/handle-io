@@ -1,4 +1,4 @@
-handle-io :wrench: :sparkles: *[WIP]*
+handle-io *[WIP]*
 ===============
 
 [![CircleCI branch](https://img.shields.io/circleci/project/github/guillaumearm/handle-io/master.svg)](https://circleci.com/gh/guillaumearm/handle-io)
