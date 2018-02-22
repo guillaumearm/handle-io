@@ -1,6 +1,8 @@
 import ioRunner from './internal/ioRunner';
 
-const createHandler = (ioGen, args) => {
+const noopGen = function*() {}
+
+const createHandler = (ioGen = noopGen, args) => {
   const handlerObject = (...args) => createHandler(ioGen, args)
   if (args) {
     handlerObject.run = (runner = ioRunner) => {
