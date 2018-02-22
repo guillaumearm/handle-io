@@ -21,7 +21,7 @@
     "test:coverage": "npm run test -- --coverage",
     "test:update": "npm run test -- --updateSnapshot",
     "test:integration": "npm run build:packages && npm run test -- --config jest-integration.config.json",
-    "test:all": "npm run lint && npm run clean && npm run test:integration && npm run test",
+    "test:all": "npm run clean && npm run lint && npm run test && npm run test:integration",
     "test:ci": "npm run test:all && npm run nsp:check",
     "lint": "eslint .",
     "lint:fix": "npm run lint -- --fix",
