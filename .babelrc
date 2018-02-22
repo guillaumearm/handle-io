@@ -5,11 +5,8 @@
         "node_modules/**"
       ],
       "presets": [
-        "es2015"
-      ],
-      "plugins": [
-        "syntax-object-rest-spread",
-        "transform-async-to-generator"
+        ["es2015"],
+        ["stage-0"]
       ]
     }
   }
