@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`integration commonjs should expose valid handle-io api 1`] = `
+Object {
+  "handler": [Function],
+  "io": [Function],
+  "testHandler": [Function],
+}
+`;
+
+exports[`integration es module should expose valid handle-io api 1`] = `
+Object {
+  "handler": [Function],
+  "io": [Function],
+  "testHandler": [Function],
+}
+`;
+
+exports[`integration umd module should expose valid handle-io api 1`] = `
+Object {
+  "handler": [Function],
+  "io": [Function],
+  "testHandler": [Function],
+}
+`;
