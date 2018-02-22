@@ -1,26 +1,30 @@
+import { resolve, join } from 'path';
 import { describe, test } from 'async-describe';
-import { resolve } from 'path';
 import rimraf from 'rimraf-promise';
 import * as rollup from 'rollup';
-import { pipe, ap, when, of } from 'ramda';
-import { isNotArray } from 'ramda-adjunct';
+
 import rollupConfigs from '../rollup.config.js';
 
+
+const testSuites = [
+  require('./api'),
+];
+
+const bundlePrefix = 'bundle-'
 const tmpFolder = resolve(__dirname, 'tmp');
-const removeTmpFolder = async () => rimraf(tmpFolder);
 
-const ensureArray = when(isNotArray, of);
-
-const testHandleIo = pipe(
-  ensureArray,
-  ap([
-    require('./api'),
-  ]),
-);
+const runTestSuites = async (handleIoApi) => {
+  for (const testSuite of testSuites) {
+    await testSuite(handleIoApi);
+  }
+}
 
 const buildModule = async ({ output, ...input }) => {
   const bundle = await rollup.rollup(input);
-  return bundle.write({ ...output, file: resolve(__dirname, 'tmp', `bundle-${output.format}.js`) });
+  return bundle.write({
+    ...output,
+    file: join(tmpFolder, `${bundlePrefix}${output.format}.js`),
+  });
 }
 
 describe('bundle integration tests', async () => {
@@ -37,23 +41,20 @@ describe('bundle integration tests', async () => {
     });
   });
   await describe('commonjs module', async () => {
-    // eslint-disable-next-line node/no-missing-require
-    testHandleIo(require('./tmp/bundle-cjs.js'));
+    await runTestSuites(require(`${tmpFolder}/${bundlePrefix}cjs.js`));
   });
 
   await describe('es module', async () => {
-    // eslint-disable-next-line node/no-missing-require
-    testHandleIo(require('./tmp/bundle-es.js'));
+    await runTestSuites(require(`${tmpFolder}/${bundlePrefix}es.js`));
   });
 
   await describe('umd module', async () => {
-    // eslint-disable-next-line node/no-missing-require
-    testHandleIo(require('./tmp/bundle-umd.js'));
+    await runTestSuites(require(`${tmpFolder}/${bundlePrefix}umd.js`));
   });
 
   await describe('clean', async () => {
-    await test('remove tmp folder', async () => {
-      await removeTmpFolder();
+    await test(`remove ${tmpFolder} folder`, async () => {
+      await rimraf(tmpFolder);
     })
   });
 });
