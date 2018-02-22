@@ -1,12 +1,14 @@
-const testHandleIo = (handleIo) => {
-  test('should expose handle-io api', () => {
-    const { io, handler, testHandler } = handleIo;
-    expect(typeof io).toBe('function');
-    expect(typeof handler).toBe('function');
-    expect(typeof testHandler).toBe('function');
-    expect(Object.keys(handleIo)).toEqual(['io', 'handler', 'testHandler']);
-  });
-}
+import { pipe, ap, when, of } from 'ramda';
+import { isNotArray } from 'ramda-adjunct';
+
+const ensureArray = when(isNotArray, of);
+
+const testHandleIo = pipe(
+  ensureArray,
+  ap([
+    require('./api'),
+  ]),
+);
 
 describe('integration', () => {
   describe('commonjs', () => {
