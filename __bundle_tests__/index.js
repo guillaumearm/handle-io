@@ -8,6 +8,7 @@ import rollupConfigs from '../rollup.config.js';
 
 const testSuites = [
   require('./api'),
+  require('./example-readme-logtwice'),
 ];
 
 const bundlePrefix = 'bundle-'

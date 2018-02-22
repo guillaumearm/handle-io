@@ -87,7 +87,8 @@
     "rimraf-promise": "^2.0.0",
     "rollup": "^0.56.2",
     "rollup-plugin-commonjs": "^8.3.0",
-    "rollup-plugin-node-resolve": "^3.0.3"
+    "rollup-plugin-node-resolve": "^3.0.3",
+    "sinon": "^4.3.0"
   },
   "config": {
     "commitizen": {
