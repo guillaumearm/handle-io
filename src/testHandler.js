@@ -2,6 +2,9 @@ import isEqual from 'lodash.isequal';
 import { stringify } from './internal/utils';
 
 const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = false) => {
+  if (typeof h !== 'function') {
+    throw new Error('Handler should be a function')
+  }
   return {
     matchIo: (io, ret) => createTestHandler(
       h,
@@ -11,12 +14,7 @@ const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = fals
     ),
     shouldReturn: (expected) => createTestHandler(h, mockedIOs, expected, true),
     run: () => {
-      // 1. should be a handler
-      if (typeof h !== 'function') {
-        throw new Error('Handler should be a function')
-      }
-
-      // 2. run handler using a custom runner to get a retValue
+      // 1. run handler using a custom runner to get a retValue
       let mockIndex = 0;
       const retValue = h.run((io) => {
         if (!mockedIOs[mockIndex]) {
@@ -35,7 +33,7 @@ const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = fals
         return mockedRetValue;
       })
 
-      // 3. expectedRetValue and retValue should be equal
+      // 2. expectedRetValue and retValue should be equal
       if (assertRet && !isEqual(expectedRetValue, retValue)) {
         throw new Error(`Invalid returned value : expected ${expectedRetValue} but got ${retValue}`)
       }
