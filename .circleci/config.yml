@@ -2,108 +2,19 @@
 
 version: 2
 jobs:
-  test_node_6:
-    docker:
-      - image: circleci/node:6
-
-    filters:
-      branches:
-        ignore: gh-pages
-
-    steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - handle-io-dependencies-node6-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - handle-io-dependencies-node6-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: handle-io-dependencies-node6-{{ checksum "package-lock.json" }}
-
-      # run tests!
-      - run: npm run test:ci
-
-  test_node_7:
-    docker:
-      - image: circleci/node:7
-
-    filters:
-      branches:
-        ignore: gh-pages
-
-    steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - handle-io-dependencies-node7-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - handle-io-dependencies-node7-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: handle-io-dependencies-node7-{{ checksum "package-lock.json" }}
-
-      # run tests!
-      - run: npm run test:ci
-
-  test_node_8:
-    docker:
-      - image: circleci/node:8
-
-    filters:
-      branches:
-        ignore: gh-pages
-
-    steps:
-      - checkout
-
-      # Download and cache dependencies
-      - restore_cache:
-          keys:
-          - handle-io-dependencies-node8-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - handle-io-dependencies-node8-
-
-      - run: npm install
-
-      - save_cache:
-          paths:
-            - node_modules
-          key: handle-io-dependencies-node8-{{ checksum "package-lock.json" }}
-
-      # run tests!
-      - run: npm run test:ci
-
-  test_node_9:
+  install:
     docker:
       - image: circleci/node:9
-
     filters:
       branches:
         ignore: gh-pages
-
     steps:
       - checkout
-
-      # Download and cache dependencies
       - restore_cache:
           keys:
           - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
-          # fallback to using the latest cache if no exact match is found
-          - handle-io-dependencies-node9-
 
+      # install
       - run: npm install
 
       - save_cache:
@@ -111,14 +22,179 @@ jobs:
             - node_modules
           key: handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
 
-      # run tests!
-      - run: npm run test:ci
+  build:
+    docker:
+      - image: circleci/node:9
+    filters:
+      branches:
+        ignore: gh-pages
+    steps:
+      - checkout
+      - restore-cache:
+          keys:
+            - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run build
+      - run: npm run build
+
+      - store_artifacts:
+          path: ./dist
+      - store_artifacts:
+          path: ./lib
+      - store_artifacts:
+          path: ./es
+
+  unit_test:
+    docker:
+      - image: circleci/node:9
+    filters:
+      branches:
+        ignore: gh-pages
+    steps:
+      - checkout
+      - restore-cache:
+          keys:
+            - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run test
+      - run: npm run test
+
+  style_test:
+    docker:
+      - image: circleci/node:9
+    filters:
+      branches:
+        ignore: gh-pages
+    steps:
+      - checkout
+      - restore-cache:
+          keys:
+            - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run lint
+      - run: npm run lint
+
+  nsp_test:
+    docker:
+      - image: circleci/node:9
+    filters:
+      branches:
+        ignore: gh-pages
+    steps:
+      - checkout
+      - restore-cache:
+          keys:
+            - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run nsp:check
+      - run: npm run nsp:check
+
+  node6_bundle_test:
+    docker:
+      - image: circleci/node:6
+    filters:
+      branches:
+        ignore: gh-pages
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run test:bundle
+      - run: npm run test:bundle
+
+
+  node7_bundle_test:
+    docker:
+      - image: circleci/node:7
+    filters:
+      branches:
+        ignore: gh-pages
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run test:bundle
+      - run: npm run test:bundle
+
+
+  node8_bundle_test:
+    docker:
+      - image: circleci/node:8
+    filters:
+      branches:
+        ignore: gh-pages
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run test:bundle
+      - run: npm run test:bundle
+
+
+  node9_bundle_test:
+    docker:
+      - image: circleci/node:9
+    filters:
+      branches:
+        ignore: gh-pages
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run test:bundle
+      - run: npm run test:bundle
 
 workflows:
   version: 2
-  test:
+  build_test:
     jobs:
-      - test_node_6
-      - test_node_7
-      - test_node_8
-      - test_node_9
+      - install
+      - unit_test:
+          requires:
+            - install
+
+      - style_test:
+          requires:
+            - install
+
+      - nsp_test:
+          requires:
+            - install
+
+      - node6_bundle_test:
+          requires:
+            - install
+
+      - node7_bundle_test:
+          requires:
+            - install
+
+      - node8_bundle_test:
+          requires:
+            - install
+
+      - node9_bundle_test:
+          requires:
+            - install
+
+      - build:
+          requires:
+            - unit_test
+            - style_test
+            - nsp_test
+            - node6_bundle_test
+            - node7_bundle_test
+            - node8_bundle_test
+            - node9_bundle_test
