@@ -7,9 +7,3 @@ export {
   handler,
   testHandler,
 }
-
-// export default {
-//   io,
-//   handler,
-//   testHandler,
-// }

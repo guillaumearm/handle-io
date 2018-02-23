@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`internal/utils stringify JSON.stringify with padding 2 1`] = `
+exports[`handle-io/internal/utils stringify JSON.stringify with padding 2 1`] = `
 "{
   \\"a\\": true,
   \\"b\\": true,

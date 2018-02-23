@@ -28,7 +28,7 @@ jobs:
           key: handle-io-dependencies-node6-{{ checksum "package-lock.json" }}
 
       # run tests!
-      - run: npm run test:all
+      - run: npm run test:ci
 
   test_node_7:
     docker:
@@ -56,7 +56,7 @@ jobs:
           key: handle-io-dependencies-node7-{{ checksum "package-lock.json" }}
 
       # run tests!
-      - run: npm run test:all
+      - run: npm run test:ci
 
   test_node_8:
     docker:
@@ -84,7 +84,7 @@ jobs:
           key: handle-io-dependencies-node8-{{ checksum "package-lock.json" }}
 
       # run tests!
-      - run: npm run test:all
+      - run: npm run test:ci
 
   test_node_9:
     docker:
@@ -112,7 +112,7 @@ jobs:
           key: handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
 
       # run tests!
-      - run: npm run test:all
+      - run: npm run test:ci
 
 workflows:
   version: 2
