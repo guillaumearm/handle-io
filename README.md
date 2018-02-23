@@ -5,7 +5,7 @@ handle-io :sparkles: *[WIP]*
 [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 [![dependencies Status](https://david-dm.org/guillaumearm/handle-io/status.svg)](https://david-dm.org/guillaumearm/handle-io)
 [![devDependencies Status](https://david-dm.org/guillaumearm/handle-io/dev-status.svg)](https://david-dm.org/guillaumearm/handle-io?type=dev)
-[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/guillaumearm/handle-io/blob/master/docs/CONTRIBUTING.md)
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/guillaumearm/handle-io/blob/master/CONTRIBUTING.md)
 [![NSP Status](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe/badge)](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe)
 
 Highly inspired by [funkia/io](https://github.com/funkia/io) and [redux-saga](https://github.com/redux-saga/redux-saga), this library intends to wrap small pieces of impure code, orchestrates and tests them.
