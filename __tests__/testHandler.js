@@ -129,6 +129,18 @@ describe('handle-io/testHandler', () => {
       ).toThrow('Too much runned io');
     });
 
+    test('not enough runner iuo', () => {
+      expect(() => testHandler(fakeHandler)
+        .shouldReturn(42)
+        .matchIo({ f: f1, args: args1 }, 'a')
+        .matchIo({ f: f1, args: args2 }, 'b')
+        .matchIo({ f: f2, args: args1 }, 'c')
+        .matchIo({ f: f2, args: args2 }, 'd')
+        .matchIo({ f: () => {}, args: [] }, 'x')
+        .run()
+      ).toThrow('Not enough runned io');
+    });
+
     test('invalid io function', () => {
       expect(() => testHandler(fakeHandler)
         .shouldReturn(42)
