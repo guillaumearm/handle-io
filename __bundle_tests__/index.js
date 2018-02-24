@@ -8,6 +8,7 @@ import rollupConfigs from '../rollup.config.js';
 
 const testSuites = [
   require('./api'),
+  require('./errors'),
   require('./example-readme-logtwice'),
   require('./example-readme-addvalues'),
 ];

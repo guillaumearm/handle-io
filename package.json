@@ -21,6 +21,7 @@
     "test:coverage": "npm run test -- --coverage",
     "test:update": "npm run test -- --updateSnapshot",
     "test:bundle": "NODE_ENV=test node -r babel-register -r babel-polyfill __bundle_tests__/index.js",
+    "test:bundle:watch": "NODE_ENV=test nodemon -i __bundle_tests__/tmp -r babel-register -r babel-polyfill __bundle_tests__/index.js",
     "test:nsp": "nsp check",
     "test:all": "npm run lint && npm run test && npm run test:bundle",
     "lint": "eslint .",
