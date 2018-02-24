@@ -31,9 +31,13 @@ const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = fals
         }
         mockIndex += 1;
         return mockedRetValue;
-      })
+      });
 
-      // 2. expectedRetValue and retValue should be equal
+      if (mockIndex < mockedIOs.length) {
+        throw new Error('Not enough runned io');
+      }
+
+      // 3. expectedRetValue and retValue should be equal
       if (assertRet && !isEqual(expectedRetValue, retValue)) {
         throw new Error(`Invalid returned value : expected ${expectedRetValue} but got ${retValue}`)
       }
