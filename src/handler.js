@@ -1,4 +1,5 @@
 import ioRunner from './internal/ioRunner';
+import BypassHandlerError from './internal/BypassHandlerError';
 
 const noopGen = function*() {}
 
@@ -10,7 +11,14 @@ const createHandler = (ioGen = noopGen, args) => {
       let genResult = gen.next()
       while (!genResult.done) {
         const { value: io } = genResult
-        genResult = gen.next(io.run(runner))
+        try {
+          genResult = gen.next(io.run(runner))
+        } catch (e) {
+          if (e instanceof BypassHandlerError) {
+            throw e
+          }
+          genResult = gen.throw(e)
+        }
       }
       return genResult.value
     }

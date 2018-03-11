@@ -1,4 +1,5 @@
 import { applyTo, identity, inc } from 'ramda';
+import BypassHandlerError from '../src/internal/BypassHandlerError';
 import handler from '../src/handler';
 
 describe('handle-io/handler', () => {
@@ -106,6 +107,76 @@ describe('handle-io/handler', () => {
         expect(runner.mock.calls).toHaveLength(4);
         expect(runner.mock.calls).toEqual([[42], [42], [42], [42]])
       });
+    });
+
+    describe('handler that throws Error', () => {
+      const handlerWithError = handler(function* () {
+        throw new Error('[error]');
+      })
+      test('throws an error', () => {
+        expect(handlerWithError().run).toThrow('[error]');
+      })
+    });
+
+    describe('nested handler that throws Error', () => {
+      const handlerWithError = handler(function* () {
+        yield handler(function* () {
+          throw new Error('[error]');
+        })()
+      })
+      test('throws an error', () => {
+        expect(handlerWithError().run).toThrow('[error]');
+      })
+    });
+
+    describe('nested handler that throws Error (catched)', () => {
+      const handlerWithError = handler(function* () {
+        try {
+          yield handler(function* () {
+            throw new Error('[error]');
+          })()
+        } catch (e) {
+          return 'no error'
+        }
+      })
+      test('throws an error', () => {
+        expect(handlerWithError().run()).toBe('no error');
+      })
+    });
+
+    describe('handler that throws BypassHandlerError', () => {
+      const handlerWithError = handler(function* () {
+        throw new BypassHandlerError('[error]');
+      })
+      test('throws an error', () => {
+        expect(handlerWithError().run).toThrow('[error]');
+      })
+    });
+
+    describe('nested handlers that throws BypassHandlerError', () => {
+      const handleWithError = handler(function* () {
+        yield handler(function* () {
+          throw new BypassHandlerError('[error]');
+        })()
+      })
+      test('throws an error', () => {
+        expect(handleWithError().run).toThrow('[error]');
+      })
+    });
+
+    describe('nested handlers that throws BypassHandlerError (cannot be catched)', () => {
+      const handleWithError = handler(function* () {
+        try {
+          yield handler(function* () {
+            throw new BypassHandlerError('[error]');
+          })()
+        } catch (e) {
+          return 'no error'
+        }
+      })
+      test('throws an error', () => {
+        expect(handleWithError().run).toThrow('[error]');
+      })
     });
   });
 });

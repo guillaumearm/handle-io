@@ -125,15 +125,40 @@ And same as for **IO**, don't use **.run()** everywhere in your codebase.
 
 **handlers** are combinable together : **you can yield a handler**.
 
-## Asynchronous code
+### Deal with errors
+You can throw an error inside IO or Handler.
+
+Errors can be try/catch 3 ways :
+- try/catch [io .run()](#run-io) method.
+- try/catch [handler .run()](#run-handlers) method.
+- try/catch inside handler.
+
+e.g.
+
+```js
+const handler1 = handler(function*() {
+  throw new Error();
+});
+
+const io1 = io(() => { throw new Error() });
+
+// handler2 is safe, it can't throw because it handlers errors
+const handler2 = handler(function*() {
+  try {
+    yield io1();
+    yield handler1();
+  } catch (e) {
+    console.error(e);
+  }
+});
+
+```
+
+### Asynchronous code
 
 *[WIP]*
 
-## Errors
-
-*[WIP]*
-
-## API
+### API
 
 *[WIP]*
 

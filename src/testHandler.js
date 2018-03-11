@@ -1,3 +1,4 @@
+import BypassHandlerError from './internal/BypassHandlerError';
 import isEqual from 'lodash.isequal';
 import { stringify } from './internal/utils';
 
@@ -18,16 +19,16 @@ const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = fals
       let mockIndex = 0;
       const retValue = h.run((io) => {
         if (!mockedIOs[mockIndex]) {
-          throw new Error('Too much runned io')
+          throw new BypassHandlerError('Too much runned io')
         }
         const [expectedIO, mockedRetValue] = mockedIOs[mockIndex];
         if (!isEqual(io.f, expectedIO.f)) {
-          throw new Error(`Invalid IO#${mockIndex} function`)
+          throw new BypassHandlerError(`Invalid IO#${mockIndex} function`)
         }
         if (!isEqual(io.args, expectedIO.args)) {
           const expectedArgs = stringify(expectedIO.args);
           const ioArgs = stringify(io.args);
-          throw new Error(`Invalid IO#${mockIndex} function arguments: expected \n${expectedArgs}\nbut got \n${ioArgs}`)
+          throw new BypassHandlerError(`Invalid IO#${mockIndex} function arguments: expected \n${expectedArgs}\nbut got \n${ioArgs}`)
         }
         mockIndex += 1;
         return mockedRetValue;
