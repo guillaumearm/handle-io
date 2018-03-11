@@ -8,5 +8,4 @@ export {
   io,
   handler,
   testHandler,
-  yolo,
 }
