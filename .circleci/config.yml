@@ -23,6 +23,7 @@ jobs:
       - save_cache:
           paths:
             - node_modules
+            - package-lock.json
           key: handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
 
   build:
