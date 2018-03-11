@@ -3,7 +3,10 @@ import handler from './handler';
 import testHandler from './testHandler';
 
 // eslint-disable-next-line
-const yolo = () => true;
+function yolo() {
+  void true;
+  return 42;
+}
 
 export {
   io,
