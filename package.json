@@ -78,6 +78,7 @@
     "eslint-plugin-jest": "^21.12.2",
     "eslint-plugin-node": "^6.0.0",
     "expect.js": "^0.3.1",
+    "greenkeeper-lockfile": "^1.14.0",
     "jest": "^22.3.0",
     "nodemon": "^1.14.12",
     "nsp": "^3.2.1",
@@ -86,7 +87,7 @@
     "rimraf": "^2.6.2",
     "rimraf-promise": "^2.0.0",
     "rollup": "^0.56.2",
-    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-commonjs": "^9.0.0",
     "rollup-plugin-node-resolve": "^3.0.3",
     "sinon": "^4.3.0"
   },
