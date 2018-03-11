@@ -63,6 +63,25 @@ jobs:
       # run test
       - run: npm run test
 
+  code_coverage:
+    docker:
+      - image: circleci/node:9
+    filters:
+      branches:
+        ignore: gh-pages
+    steps:
+      - checkout
+      - restore-cache:
+          keys:
+            - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run test:coverage
+      - run: npm run test:coverage
+
+      # run codecov
+      - run: npx codecov
+
+
   style_test:
     docker:
       - image: circleci/node:9
@@ -185,6 +204,10 @@ workflows:
           requires:
             - install
 
+      - code_coverage:
+          requires:
+            - install
+
       - style_test:
           requires:
             - install
@@ -212,6 +235,7 @@ workflows:
       - build:
           requires:
             - unit_test
+            - code_coverage
             - style_test
             - nsp_test
             - node6_bundle_test
