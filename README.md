@@ -3,12 +3,12 @@ handle-io :sparkles: *[WIP]*
 
 [![CircleCI branch](https://img.shields.io/circleci/project/github/guillaumearm/handle-io/master.svg)](https://circleci.com/gh/guillaumearm/handle-io)
 [![codecov](https://codecov.io/gh/guillaumearm/handle-io/branch/master/graph/badge.svg)](https://codecov.io/gh/guillaumearm/handle-io)
-[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+[![Greenkeeper badge](https://badges.greenkeeper.io/guillaumearm/handle-io.svg)](https://greenkeeper.io/)
+[![NSP Status](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe/badge)](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe)
 [![dependencies Status](https://david-dm.org/guillaumearm/handle-io/status.svg)](https://david-dm.org/guillaumearm/handle-io)
 [![devDependencies Status](https://david-dm.org/guillaumearm/handle-io/dev-status.svg)](https://david-dm.org/guillaumearm/handle-io?type=dev)
-[![Greenkeeper badge](https://badges.greenkeeper.io/guillaumearm/handle-io.svg)](https://greenkeeper.io/)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/guillaumearm/handle-io/blob/master/CONTRIBUTING.md)
-[![NSP Status](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe/badge)](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe)
+[![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
 
 Highly inspired by [funkia/io](https://github.com/funkia/io) and [redux-saga](https://github.com/redux-saga/redux-saga), this library intends to wrap small pieces of impure code, orchestrates and tests them.
 
