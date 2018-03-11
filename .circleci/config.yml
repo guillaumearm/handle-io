@@ -17,6 +17,9 @@ jobs:
       # install
       - run: npm install
 
+      # update lockfile
+      - run: npx greenkeeper-lockfile-update
+
       - save_cache:
           paths:
             - node_modules
@@ -156,6 +159,22 @@ jobs:
       # run test:bundle
       - run: npm run test:bundle
 
+  lockfile-upload:
+    docker:
+      - image: circleci/node:9
+    filters:
+      branches:
+        ignore: gh-pages
+
+    steps:
+      - checkout
+      - restore_cache:
+          keys:
+          - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # upload lockfile
+      - run: npx greenkeeper-lockfile-upload
+
 workflows:
   version: 2
   build_test:
@@ -198,3 +217,7 @@ workflows:
             - node7_bundle_test
             - node8_bundle_test
             - node9_bundle_test
+
+      - lockfile-upload:
+          requires:
+            - build
