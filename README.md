@@ -144,7 +144,7 @@ const handler1 = handler(function*() {
 
 const io1 = io(() => { throw new Error() });
 
-// handler2 is safe, it can't throw because it handlers errors
+// handler2 is safe, it can't throw because it handles errors
 const handler2 = handler(function*() {
   try {
     yield io1();
