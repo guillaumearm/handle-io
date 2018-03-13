@@ -81,7 +81,7 @@
     "expect.js": "0.3.1",
     "greenkeeper-lockfile": "1.14.0",
     "jest": "22.4.2",
-    "nodemon": "1.17.1",
+    "nodemon": "1.17.2",
     "nsp": "3.2.1",
     "ramda": "0.25.0",
     "ramda-adjunct": "2.5.0",
