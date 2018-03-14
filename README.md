@@ -5,7 +5,7 @@ handle-io :sparkles: *[WIP]*
 [![codecov](https://codecov.io/gh/guillaumearm/handle-io/branch/master/graph/badge.svg)](https://codecov.io/gh/guillaumearm/handle-io)
 [![npm](https://img.shields.io/npm/v/handle-io.svg)](https://www.npmjs.com/package/handle-io)
 [![Greenkeeper badge](https://badges.greenkeeper.io/guillaumearm/handle-io.svg)](https://greenkeeper.io/)
-[![NSP Status](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe/badge)](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe)
+[![NSP Status](https://nodesecurity.io/orgs/trapcodien/projects/b050060a-8207-40cc-a229-89efb0e8cee0/badge)](https://nodesecurity.io/orgs/trapcodien/projects/b050060a-8207-40cc-a229-89efb0e8cee0)
 [![dependencies Status](https://david-dm.org/guillaumearm/handle-io/status.svg)](https://david-dm.org/guillaumearm/handle-io)
 [![devDependencies Status](https://david-dm.org/guillaumearm/handle-io/dev-status.svg)](https://david-dm.org/guillaumearm/handle-io?type=dev)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/guillaumearm/handle-io/blob/master/CONTRIBUTING.md)
