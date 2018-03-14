@@ -100,21 +100,6 @@ jobs:
       # run lint
       - run: npm run lint
 
-  nsp_test:
-    docker:
-      - image: circleci/node:9
-    filters:
-      branches:
-        ignore: gh-pages
-    steps:
-      - checkout
-      - restore-cache:
-          keys:
-            - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
-
-      # run test:nsp
-      - run: npm run test:nsp
-
   node6_bundle_test:
     docker:
       - image: circleci/node:6
@@ -200,10 +185,6 @@ workflows:
           requires:
             - install
 
-      - nsp_test:
-          requires:
-            - install
-
       - node6_bundle_test:
           requires:
             - install
@@ -225,7 +206,6 @@ workflows:
             - unit_test
             - code_coverage
             - style_test
-            - nsp_test
             - node6_bundle_test
             - node7_bundle_test
             - node8_bundle_test
