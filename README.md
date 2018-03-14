@@ -3,6 +3,7 @@ handle-io :sparkles: *[WIP]*
 
 [![CircleCI branch](https://img.shields.io/circleci/project/github/guillaumearm/handle-io/master.svg)](https://circleci.com/gh/guillaumearm/handle-io)
 [![codecov](https://codecov.io/gh/guillaumearm/handle-io/branch/master/graph/badge.svg)](https://codecov.io/gh/guillaumearm/handle-io)
+[![npm](https://img.shields.io/npm/v/handle-io.svg)](https://www.npmjs.com/package/handle-io)
 [![Greenkeeper badge](https://badges.greenkeeper.io/guillaumearm/handle-io.svg)](https://greenkeeper.io/)
 [![NSP Status](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe/badge)](https://nodesecurity.io/orgs/trapcodien/projects/b8c8d3c2-8b69-4c0b-bd6b-09d8b490dcbe)
 [![dependencies Status](https://david-dm.org/guillaumearm/handle-io/status.svg)](https://david-dm.org/guillaumearm/handle-io)
