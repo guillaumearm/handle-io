@@ -2,7 +2,7 @@ import expect from 'expect.js';
 import { test, describe } from 'async-describe';
 
 module.exports = ({ io, handler, testHandler }) => (
-  describe('errors', async () => {
+  describe('synchronous errors', async () => {
     const isError = e => { expect(e).to.match(/\[error\]/) }
     const makeError = io(() => { throw new Error('[error]') });
 
