@@ -20,6 +20,9 @@ jobs:
       # update lockfile
       - run: npx greenkeeper-lockfile-update
 
+      # fix lockfile
+      - run: npm install
+
       # upload lockfile
       - run: npx greenkeeper-lockfile-upload
 
