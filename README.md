@@ -128,27 +128,62 @@ And same as for **IO**, don't use **.run()** everywhere in your codebase.
 
 **handlers** are combinable together : **you can yield a handler**.
 
+### Promise support
+
+`handle-io` support promises and allow you to create asynchronous IO.
+
+**e.g.**
+```js
+// async io
+const sleep = io((ms) => new Promise(resolve => setTimeout(resolve, ms)));
+
+// create an async combination
+const sleepSecond = handler(function*(s) {
+  yield sleep(s * 1000);
+  return s;
+});
+
+// test this combination synchronously
+testHander(sleepSecond(42))
+  .matchIo(sleep(42000))
+  .shouldReturn(42)
+  .run()
+```
+
+Please note `sleep(n)` and `sleepSecond(n)` will expose .run() method that return a promise.
+
+**e.g.**
+```js
+sleepSecond(1).run().then((n) => {
+  console.log(`${n} second(s) waited`);
+})
+```
+
 ### Deal with errors
-You can throw an error inside IO or Handler.
+The very simple way to handle errors with `handle-io` is to use try/catch blocks.
 
-Errors can be try/catch 3 ways :
-- try/catch [io .run()](#run-io) method.
-- try/catch [handler .run()](#run-handlers) method.
-- try/catch inside handler.
+As you can see in the example below, you can try/catch any errors inside a handler :
+- Synchronous error (throw) from io
+- Asynchronous error (unhandled promise rejection) from io
+- Throw from another handler
 
-e.g.
-
+**e.g.**
 ```js
 const handler1 = handler(function*() {
   throw new Error();
 });
 
+// Synchronous IO
 const io1 = io(() => { throw new Error() });
+
+// Asynchronous IO
+const io2 = io(() => Promise.reject(new Error()));
 
 // handler2 is safe, it can't throw because it handles errors
 const handler2 = handler(function*() {
   try {
     yield io1();
+    yield io2();
     yield handler1();
   } catch (e) {
     console.error(e);
@@ -156,15 +191,6 @@ const handler2 = handler(function*() {
 });
 
 ```
-
-### Asynchronous code
-
-*[WIP]*
-
-### API
-
-*[WIP]*
-
 
 ## License
 [MIT](https://github.com/guillaumearm/handle-io/blob/master/LICENSE)
