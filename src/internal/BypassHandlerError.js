@@ -1,5 +1,8 @@
 const BypassHandlerError = function(...args) {
-  this.e = new Error(...args);
+  const e = new Error(...args);
+  this.e = e;
+  this.message = e.message;
+  this.stack = e.stack;
 }
 
 BypassHandlerError.prototype.toString = function() {
