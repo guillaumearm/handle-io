@@ -25,12 +25,11 @@ testHandler(logTwice('hello world'))
   .run()
 ```
 
-This piece of code is an assertion, an error will be throw if something go wrong :
-
-- wrong io
-- wrong io arguments
-- too much runned io
-- not enough runned io
+This piece of code is an assertion, an error will be thrown if something goes wrong:
+- wrong io function,
+- wrong io arguments,
+- too much io ran,
+- not enough io ran.
 
 # Getting started
 
@@ -43,37 +42,37 @@ npm install --save handle-io
 ### IO
 
 io is just a wrapper for functions and arguments.
-In some way, it transforms impure functions into pure functions
+In some way, it transforms impure functions into pure functions.
 
-Conceptually, an io just could be :
+Conceptually, an io function could just be defined in this way:
 
 ```js
 const log = (...args) => [console.log, args];
 ```
 
-but in `handle-io`, it's not.
+but in `handle-io`, it isn't.
 
-##### Create IO
+##### Create IO functions
 
-you can use `io` to create one :
+You can use `io` to create one:
 ```js
 const { io } = require('handle-io');
 const log = io(console.log);
 ```
 
-##### Run IO
+##### Run IO functions
 
-call .run() after apply io to arguments :
+Calling .run() after applies the io function to its arguments:
 ```js
 log('Hello', 'World').run(); // print Hello World
 ```
 
-**keep it mind** : piece of codes with `.run()` cannot be tested properly.
+**Keep in mind**: pieces of code with `.run()` cannot be tested properly.
 
-All the idea of this library is to apply **IO** in structures called **handlers**.
+The idea of this library is to apply an **IO** function inside a structure called **handler**.
 
 ### Handlers
-A **handler** is a wrapped pure [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) which just apply some **IO** and/or **handlers**.
+A **handler** is a wrapped pure [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) which just apply some **IO** function and/or **handler**.
 
 **e.g.**
 
@@ -88,15 +87,15 @@ const logTwice = handler(function*(...args) {
 });
 ```
 
-#### Write tests for handlers
+#### Writing tests for handlers
 
-Write a test for this **handler** is very simple (please see first example above).
+Writing tests for **handlers** is very simple (please see the first example above).
 
-But what about test a **handler** which apply **IO** and return values ?
+What about testing a **handler** which applies an **IO** function and returns values ?
 
-**There is a very simple way** :
-- using second argument of .matchIo() method to mock returned values.
-- using .shouldReturn() to assert final value
+**There is a very simple way**:
+- using the second argument of the .matchIo() method to mock returned values.
+- using .shouldReturn() to assert on the final value
 
 **e.g.**
 
@@ -118,20 +117,20 @@ testHandler(addValues())
   .run()
 ```
 
-#### Run handlers
-Same as for **IO**, there is a **.run()** method :
+#### Running handlers
+Same as for **IO** functions, there is a **.run()** method:
 
 ```js
 addValues().run() // => 42
 ```
 
-And same as for **IO**, don't use **.run()** everywhere in your codebase.
+Likewise, don't use handlers' **.run()** everywhere in your codebase.
 
-**handlers** are combinable together : **you can yield a handler**.
+**handlers** are combinable together: **you can yield a handler**.
 
 ### Promise support
 
-`handle-io` support promises and allow you to create asynchronous IO.
+`handle-io` supports promises and allows you to create asynchronous IO.
 
 **e.g.**
 ```js
@@ -151,7 +150,7 @@ testHander(sleepSecond(42))
   .run()
 ```
 
-Please note `sleep(n)` and `sleepSecond(n)` will expose .run() method that return a promise.
+Please note that `sleep(n)` and `sleepSecond(n)` will expose .run() methods that return a promise.
 
 **e.g.**
 ```js
@@ -161,12 +160,12 @@ sleepSecond(1).run().then((n) => {
 ```
 
 ### Deal with errors
-The very simple way to handle errors with `handle-io` is to use try/catch blocks.
+The simplest way to handle errors with `handle-io` is to use try/catch blocks.
 
-As you can see in the example below, you can try/catch any errors inside a handler :
-- Synchronous error (throw) from io
-- Asynchronous error (unhandled promise rejection) from io
-- Throw from another handler
+As you can see in the example below, you can try/catch any errors inside a handler:
+- Synchronous error (thrown) from io,
+- Asynchronous error (unhandled promise rejection) from io,
+- Thrown from another handler.
 
 **e.g.**
 ```js
