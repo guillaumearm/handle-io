@@ -33,7 +33,7 @@ This piece of code is an assertion, an error will be thrown if something goes wr
 
 # Getting started
 
-## Install (not published on npm yet)
+## Install
 
 ```js
 npm install --save handle-io
