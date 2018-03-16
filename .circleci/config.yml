@@ -19,8 +19,6 @@ jobs:
 
       # update lockfile
       - run: npx greenkeeper-lockfile-update
-
-      # fix lockfile
       - run: npm install
 
       # upload lockfile
@@ -68,6 +66,21 @@ jobs:
 
       # run test
       - run: npm run test
+
+  release:
+    docker:
+      - image: circleci/node:9
+    filters:
+      branches:
+        ignore: gh-pages
+    steps:
+      - checkout
+      - restore-cache:
+          keys:
+            - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # run semantic-release
+      - run: npx semantic-release
 
   code_coverage:
     docker:
@@ -213,3 +226,7 @@ workflows:
             - node7_bundle_test
             - node8_bundle_test
             - node9_bundle_test
+
+      - release:
+          requires:
+            - build
