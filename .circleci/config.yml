@@ -15,7 +15,7 @@ jobs:
       - run: sudo npm install -g npm@latest
 
       # install
-      - run: npm ci
+      - run: npm ci || npm install
 
       # update lockfile
       - run: npx greenkeeper-lockfile-update
