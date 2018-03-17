@@ -26,10 +26,10 @@ testHandler(logTwice('hello world'))
 ```
 
 This piece of code is an assertion, an error will be thrown if something goes wrong:
-- wrong io function,
-- wrong io arguments,
-- too much io ran,
-- not enough io ran.
+- wrong io function
+- wrong io arguments
+- too much io ran
+- not enough io ran
 
 # Getting started
 
@@ -94,7 +94,7 @@ Writing tests for **handlers** is very simple (please see the first example abov
 What about testing a **handler** which applies an **IO** function and returns values ?
 
 **There is a very simple way**:
-- using the second argument of the .matchIo() method to mock returned values.
+- using the second argument of the .matchIo() method to mock returned values
 - using .shouldReturn() to assert on the final value
 
 **e.g.**
@@ -163,9 +163,9 @@ sleepSecond(1).run().then((n) => {
 The simplest way to handle errors with `handle-io` is to use try/catch blocks.
 
 As you can see in the example below, you can try/catch any errors inside a handler:
-- Synchronous error (thrown) from io,
-- Asynchronous error (unhandled promise rejection) from io,
-- Thrown from another handler.
+- synchronous error (thrown) from io
+- asynchronous error (unhandled promise rejection) from io
+- thrown from another handler
 
 **e.g.**
 ```js
