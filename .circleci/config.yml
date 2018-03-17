@@ -10,12 +10,12 @@ jobs:
         ignore: gh-pages
     steps:
       - checkout
-      - restore_cache:
-          keys:
-          - handle-io-dependencies-node9-{{ checksum "package-lock.json" }}
+
+      # install latest npm version
+      - run: sudo npm install -g npm@latest
 
       # install
-      - run: npm install
+      - run: npm ci
 
       # update lockfile
       - run: npx greenkeeper-lockfile-update
