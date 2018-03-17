@@ -1,5 +1,4 @@
-Contributing to handle-io
-======================
+# Contributing to handle-io
 
 ## <a name="commit"></a> Commit Message Guidelines
 
@@ -27,14 +26,17 @@ Footer should contain a [closing reference to an issue](https://help.github.com/
 
 Samples: (even more [samples](https://github.com/guillaumearm/handle-io/commits/master))
 
+
 ```
 docs(changelog): update change log to beta.5
 ```
+
 ```
 fix(release): need to depend on latest rxjs and zone.js
 
 The version in our package.json gets copied to the one we publish, and users need the latest of these.
 ```
+
 ```
 refactor(login): make the login form validators more functional
 
@@ -50,7 +52,7 @@ Ref #3
 ```
 
 ### Revert
-If the commit reverts a previous commit, it should begin with `revert: `, followed by the header of the reverted commit. In the body it should say: `This reverts commit <hash>.`, where the hash is the SHA of the commit being reverted.
+If the commit reverts a previous commit, it should begin with `revert:`, followed by the header of the reverted commit. In the body it should say: `This reverts commit <hash>.`, where the hash is the SHA of the commit being reverted.
 
 ### Type
 Must be one of the following:

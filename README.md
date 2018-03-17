@@ -1,5 +1,4 @@
-handle-io :sparkles:
-===============
+# handle-io :sparkles:
 
 [![CircleCI branch](https://img.shields.io/circleci/project/github/guillaumearm/handle-io/master.svg)](https://circleci.com/gh/guillaumearm/handle-io)
 [![codecov](https://codecov.io/gh/guillaumearm/handle-io/branch/master/graph/badge.svg)](https://codecov.io/gh/guillaumearm/handle-io)
@@ -26,14 +25,15 @@ testHandler(logTwice('hello world'))
 ```
 
 This piece of code is an assertion, an error will be thrown if something goes wrong:
+
 - wrong io function
 - wrong io arguments
 - too much io ran
 - not enough io ran
 
-# Getting started
+## Getting started
 
-## Install
+### Install
 
 ```js
 npm install --save handle-io
@@ -55,6 +55,7 @@ but in `handle-io`, it isn't.
 ##### Create IO functions
 
 You can use `io` to create one:
+
 ```js
 const { io } = require('handle-io');
 const log = io(console.log);
@@ -63,6 +64,7 @@ const log = io(console.log);
 ##### Run IO functions
 
 Calling .run() after applies the io function to its arguments:
+
 ```js
 log('Hello', 'World').run(); // print Hello World
 ```
@@ -94,6 +96,7 @@ Writing tests for **handlers** is very simple (please see the first example abov
 What about testing a **handler** which applies an **IO** function and returns values ?
 
 **There is a very simple way**:
+
 - using the second argument of the .matchIo() method to mock returned values
 - using .shouldReturn() to assert on the final value
 
@@ -133,6 +136,7 @@ Likewise, don't use handlers' **.run()** everywhere in your codebase.
 `handle-io` supports promises and allows you to create asynchronous IO.
 
 **e.g.**
+
 ```js
 // async io
 const sleep = io((ms) => new Promise(resolve => setTimeout(resolve, ms)));
@@ -153,6 +157,7 @@ testHander(sleepSecond(42))
 Please note that `sleep(n)` and `sleepSecond(n)` will expose .run() methods that return a promise.
 
 **e.g.**
+
 ```js
 sleepSecond(1).run().then((n) => {
   console.log(`${n} second(s) waited`);
@@ -163,11 +168,13 @@ sleepSecond(1).run().then((n) => {
 The simplest way to handle errors with `handle-io` is to use try/catch blocks.
 
 As you can see in the example below, you can try/catch any errors inside a handler:
+
 - synchronous error (thrown) from io
 - asynchronous error (unhandled promise rejection) from io
 - thrown from another handler
 
 **e.g.**
+
 ```js
 const handler1 = handler(function*() {
   throw new Error();
