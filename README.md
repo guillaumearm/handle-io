@@ -67,7 +67,7 @@ Calling .run() after applies the io function to its arguments:
 log('Hello', 'World').run(); // print Hello World
 ```
 
-**Keep in mind**: pieces of code with `.run()` cannot be tested properly.
+**Keep in mind**: pieces of code using `.run()` cannot be tested properly.
 
 The idea of this library is to apply an **IO** function inside a structure called **handler**.
 
