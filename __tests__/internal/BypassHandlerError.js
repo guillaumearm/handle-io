@@ -14,4 +14,24 @@ describe('handle-io/internal/BypassHandlerError', () => {
       expect(new BypassHandlerError().e).toBeInstanceOf(Error);
     });
   });
+
+  describe('properties', () => {
+    test('have .message', () => {
+      expect(new BypassHandlerError('message').message).toBe('message');
+    });
+
+    test('have .stack', () => {
+      expect(typeof new BypassHandlerError().stack).toBe('string');
+    });
+
+    test('have .toString', () => {
+      expect(typeof new BypassHandlerError().toString).toBe('function');
+    });
+  });
+
+  describe('toString', () => {
+    test('call .toString()', () => {
+      expect(new BypassHandlerError('message').toString()).toBe('BypassHandlerError: message');
+    });
+  });
 });
