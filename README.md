@@ -165,13 +165,18 @@ sleepSecond(1).run().then((n) => {
 ```
 
 ### Deal with errors
+
+#### Try/Catch
+
 The simplest way to handle errors with `handle-io` is to use try/catch blocks.
 
-As you can see in the example below, you can try/catch any errors inside a handler:
+As you can see in the example below, you can try/catch any errors:
 
-- synchronous error (thrown) from io
-- asynchronous error (unhandled promise rejection) from io
-- thrown from another handler
+- inside handler:
+  - thrown error
+- inside io:
+  - thrown error
+  - unhandled promise rejection
 
 **e.g.**
 
@@ -197,6 +202,28 @@ const handler2 = handler(function*() {
   }
 });
 
+```
+
+#### using `catchError` helper
+
+There exists a functional helper to avoid try/catchs block, it allow to easily ignore errors and/or results.
+
+Under the hood, `catchError` use a try/catch block and works the same way.
+
+**e.g.**
+
+```js
+const { io, handler, catchError } = require('handle-io');
+
+const ioError = io(() => { throw new Error() });
+
+const myHandler = handler(function*() {
+  const [res, err] = yield catchError(ioError());
+  if (err) {
+    yield log(err)
+  }
+  return res;
+})
 ```
 
 ## License
