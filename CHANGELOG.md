@@ -1,3 +1,11 @@
+<a name="0.2.0"></a>
+# [0.2.0](https://github.com/guillaumearm/handle-io/compare/v0.1.5...v0.2.0) (2018-03-19)
+
+
+### Features
+
+* add catchError ([#109](https://github.com/guillaumearm/handle-io/issues/109)) ([d9736fa](https://github.com/guillaumearm/handle-io/commit/d9736fa))
+
 <a name="0.1.5"></a>
 ## [0.1.5](https://github.com/guillaumearm/handle-io/compare/v0.1.4...v0.1.5) (2018-03-17)
 
