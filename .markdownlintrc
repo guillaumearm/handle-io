@@ -10,5 +10,6 @@
   "no-multiple-blanks": false,
   "header-increment": false,
   "fenced-code-language": false,
+  "no-duplicate-header": false,
   "first-line-h1": false
 }
