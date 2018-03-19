@@ -1,9 +1,4 @@
-import io from './io';
-import handler from './handler';
-import testHandler from './testHandler';
-
-export {
-  io,
-  handler,
-  testHandler,
-}
+export { default as io } from './io';
+export { default as handler } from './handler';
+export { default as testHandler } from './testHandler';
+export { default as catchError } from './catchError';
