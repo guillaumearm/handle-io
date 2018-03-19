@@ -172,9 +172,9 @@ The simplest way to handle errors with `handle-io` is to use try/catch blocks.
 
 As you can see in the example below, you can try/catch any errors:
 
-- inside handler:
+- inside a handler:
   - thrown error
-- inside io:
+- inside an io function:
   - thrown error
   - unhandled promise rejection
 
@@ -206,9 +206,9 @@ const handler2 = handler(function*() {
 
 #### using `catchError` helper
 
-There exists a functional helper to avoid try/catchs block, it allow to easily ignore errors and/or results.
+A functional helper exits to avoid try/catchs block, it allows to easily ignore errors and/or results.
 
-Under the hood, `catchError` use a try/catch block and works the same way.
+Under the hood, `catchError` uses a try/catch block and works similarly.
 
 **e.g.**
 
