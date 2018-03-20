@@ -111,10 +111,19 @@
           "type": "chore",
           "scope": "release",
           "release": "patch"
+        },
+        {
+          "type": "ci",
+          "scope": "release",
+          "release": "patch"
         }
       ]
     },
     "prepare": [
+      {
+        "path": "@semantic-release/exec",
+        "cmd": "npm run build"
+      },
       "@semantic-release/changelog",
       "@semantic-release/npm",
       "@semantic-release/git"
