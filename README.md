@@ -164,7 +164,7 @@ sleepSecond(1).run().then((n) => {
 })
 ```
 
-### Deal with errors
+### Dealing with errors
 
 #### Try/Catch
 
