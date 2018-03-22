@@ -26,13 +26,11 @@ const runHandler = (runner, gen, genResult) => {
   }
 }
 
-const createHandler = (ioGen = noopGen, args) => {
+const createHandler = (ioGen = noopGen, args = []) => {
   const handlerObject = (...args) => createHandler(ioGen, args)
-  if (args) {
-    handlerObject.run = (runner = ioRunner) => {
-      const gen = ioGen(...args)
-      return runHandler(runner, gen, gen.next());
-    }
+  handlerObject.run = (runner = ioRunner) => {
+    const gen = ioGen(...args)
+    return runHandler(runner, gen, gen.next());
   }
   return handlerObject
 }

@@ -19,14 +19,14 @@ describe('handle-io/io', () => {
       test('identityIo is a function', () => {
         expect(typeof identityIo).toBe('function');
       });
+      test('identityIo has "run" method', () => {
+        expect(typeof identityIo.run).toBe('function');
+      })
       test('identityIo has "f" equals to identity', () => {
         expect(identityIo.f).toBe(identity);
       })
-      test('identityIo has "args" equals to null', () => {
-        expect(identityIo.args).toBe(null);
-      })
-      test('identityIo has no "run" method', () => {
-        expect(identityIo.run).toBe(undefined);
+      test('identityIo has "args" equals to empty array', () => {
+        expect(identityIo.args).toEqual([]);
       })
     });
 

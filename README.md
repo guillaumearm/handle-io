@@ -21,7 +21,7 @@ Highly inspired by [funkia/io](https://github.com/funkia/io) and [redux-saga](ht
 testHandler(logTwice('hello world'))
   .matchIo(log('hello world'))
   .matchIo(log('hello world'))
-  .run()
+  .run();
 ```
 
 This piece of code is an assertion, an error will be thrown if something goes wrong:
@@ -63,10 +63,18 @@ const log = io(console.log);
 
 ##### Run IO functions
 
-Calling .run() after applies the io function to its arguments:
+Running log with arguments:
 
 ```js
 log('Hello', 'World').run(); // print Hello World
+```
+
+Running log without arguments:
+
+```js
+log().run();
+// or
+log.run();
 ```
 
 **Keep in mind**: pieces of code using `.run()` cannot be tested properly.
@@ -117,14 +125,16 @@ testHandler(addValues())
   .matchIo(getEnv('VALUE1'), 32),
   .matchIo(getEnv('VALUE2'), 10),
   .shouldReturn(42)
-  .run()
+  .run();
 ```
 
 #### Running handlers
 Same as for **IO** functions, there is a **.run()** method:
 
 ```js
-addValues().run() // => 42
+addValues().run(); // => 42
+// or
+addValue.run();
 ```
 
 Likewise, don't use handlers' **.run()** everywhere in your codebase.
@@ -153,7 +163,7 @@ const sleepSecond = handler(function*(s) {
 testHander(sleepSecond(42))
   .matchIo(sleep(42000))
   .shouldReturn(42)
-  .run()
+  .run();
 ```
 
 Please note that `sleep(n)` and `sleepSecond(n)` will expose .run() methods that return a promise.
@@ -163,7 +173,7 @@ Please note that `sleep(n)` and `sleepSecond(n)` will expose .run() methods that
 ```js
 sleepSecond(1).run().then((n) => {
   console.log(`${n} second(s) waited`);
-})
+});
 ```
 
 ### Dealing with errors
@@ -224,7 +234,7 @@ const ioError = io(() => { throw new Error() });
 const myHandler = handler(function*() {
   const [res, err] = yield catchError(ioError());
   if (err) {
-    yield log(err)
+    yield log(err);
   }
   return res;
 })
