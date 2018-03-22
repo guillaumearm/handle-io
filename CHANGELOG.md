@@ -1,3 +1,6 @@
+<a name="0.2.4"></a>
+## [0.2.4](https://github.com/guillaumearm/handle-io/compare/v0.2.3...v0.2.4) (2018-03-22)
+
 <a name="0.2.3"></a>
 ## [0.2.3](https://github.com/guillaumearm/handle-io/compare/v0.2.2...v0.2.3) (2018-03-20)
 
