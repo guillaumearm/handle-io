@@ -138,6 +138,8 @@ Likewise, don't use handlers' **.run()** everywhere in your codebase.
 **e.g.**
 
 ```js
+const { io, handler, testHandler } = require('handle-io');
+
 // async io
 const sleep = io((ms) => new Promise(resolve => setTimeout(resolve, ms)));
 
@@ -181,6 +183,8 @@ As you can see in the example below, you can try/catch any errors:
 **e.g.**
 
 ```js
+const { io, handler } = require('handle-io');
+
 const handler1 = handler(function*() {
   throw new Error();
 });
