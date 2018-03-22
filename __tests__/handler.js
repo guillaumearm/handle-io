@@ -19,8 +19,8 @@ describe('handle-io/handler', () => {
         test('is a function', () => {
           expect(typeof defaultHandler).toBe('function');
         });
-        test('has no "run" method', () => {
-          expect(defaultHandler.run).toBe(undefined);
+        test('has "run" method', () => {
+          expect(typeof defaultHandler.run).toBe('function');
         })
         test('calls run returns undefined', () => {
           expect(defaultHandler().run()).toBe(undefined);
@@ -37,8 +37,8 @@ describe('handle-io/handler', () => {
         test('is a function', () => {
           expect(typeof listHandler).toBe('function');
         });
-        test('has no "run" method', () => {
-          expect(listHandler.run).toBe(undefined);
+        test('has "run" method', () => {
+          expect(typeof listHandler.run).toBe('function');
         })
         test('calls run returns [1, 2, 3]', () => {
           expect(listHandler(1, 2, 3).run()).toEqual([1, 2, 3]);
