@@ -1,4 +1,4 @@
-import { io, handler, testHandler } from '../src';
+import { io, handler, testHandler, catchError } from '../src';
 
 describe('handle-io', () => {
   describe('api', () => {
@@ -11,5 +11,8 @@ describe('handle-io', () => {
     test('testHandler is a function', () => {
       expect(typeof testHandler).toBe('function');
     });
+    test('catchError is a function', () => {
+      expect(typeof catchError).toBe('function');
+    })
   });
 });
