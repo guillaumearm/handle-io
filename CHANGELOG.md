@@ -1,3 +1,11 @@
+<a name="0.4.0"></a>
+# [0.4.0](https://github.com/guillaumearm/handle-io/compare/v0.3.1...v0.4.0) (2018-03-25)
+
+
+### Features
+
+* add simulateThrow ([#130](https://github.com/guillaumearm/handle-io/issues/130)) ([2963d1d](https://github.com/guillaumearm/handle-io/commit/2963d1d)), closes [#117](https://github.com/guillaumearm/handle-io/issues/117)
+
 <a name="0.3.1"></a>
 ## [0.3.1](https://github.com/guillaumearm/handle-io/compare/v0.3.0...v0.3.1) (2018-03-24)
 
