@@ -2,7 +2,7 @@ import sinon from 'sinon';
 import expect from 'expect.js';
 import { test, describe } from 'async-describe';
 
-module.exports = ({ io, handler, testHandler, catchError }) => (
+module.exports = ({ io, handler, testHandler, catchError, simulateThrow }) => (
   describe('[README.md] Deal with errors', async () => {
     await describe('try/catch', async () => {
       const handlerError = handler(function*() {
@@ -40,19 +40,27 @@ module.exports = ({ io, handler, testHandler, catchError }) => (
     await describe('catchError', async () => {
       const consoleLog = sinon.spy();
       const log = io(consoleLog);
-      const ioError = io(() => { throw 'error' });
+      const ioError = io((e) => { throw e });
 
       const myHandler = handler(function*() {
-        const [res, err] = yield catchError(ioError());
+        const [res, err] = yield catchError(ioError('error'));
         if (err) {
           yield log(err)
         }
         return res;
       })
 
+      await test('test myHandler with error', () => {
+        testHandler(myHandler())
+          .matchIo(ioError('error'), simulateThrow('error'))
+          .matchIo(log('error'))
+          .shouldReturn(undefined)
+          .run()
+      });
+
       await test('test myHandler without error', () => {
         testHandler(myHandler())
-          .matchIo(ioError(), 42)
+          .matchIo(ioError('error'), 42)
           .shouldReturn(42)
           .run()
       });

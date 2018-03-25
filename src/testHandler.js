@@ -1,4 +1,5 @@
 import BypassHandlerError from './internal/BypassHandlerError';
+import SimulatedThrow from './internal/SimulatedThrow';
 import isEqual from 'lodash.isequal';
 import { stringify } from './internal/utils';
 
@@ -31,6 +32,9 @@ const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = fals
           throw new BypassHandlerError(`Invalid IO#${mockIndex} function arguments: expected \n${expectedArgs}\nbut got \n${ioArgs}`)
         }
         mockIndex += 1;
+        if (mockedRetValue instanceof SimulatedThrow) {
+          throw mockedRetValue.e;
+        }
         return mockedRetValue;
       });
 

@@ -179,7 +179,7 @@ sleepSecond(1).run().then((n) => {
 
 ### Dealing with errors
 
-#### Try/Catch
+#### using Try/Catch
 
 The simplest way to handle errors with `handle-io` is to use try/catch blocks.
 
@@ -230,15 +230,42 @@ Under the hood, `catchError` uses a try/catch block and works similarly.
 ```js
 const { io, handler, catchError } = require('handle-io');
 
-const ioError = io(() => { throw new Error() });
+const ioError = io((e) => { throw new Error(e) });
 
 const myHandler = handler(function*() {
-  const [res, err] = yield catchError(ioError());
+  const [res, err] = yield catchError(ioError('error'));
   if (err) {
     yield log(err);
   }
   return res;
-})
+});
+```
+
+### How to test errors
+
+By default, all mocked **IOs** doesn't throw any error.
+
+It's possible to simulate throws with `testHandler` using the `simulateThrow` test utility.
+
+Writing tests for myHandler means handle two cases :
+
+- `ioError` did throw
+
+```js
+testHandler(myHandler())
+  .matchIo(ioError('error'), simulateThrow('error'))
+  .matchIo(log('error'))
+  .shouldReturn(undefined)
+  .run();
+```
+
+- `ioError` didn't throw
+
+```js
+testHandler(myHandler())
+  .matchIo(ioError('error'), 42)
+  .shouldReturn(42)
+  .run();
 ```
 
 ## License
