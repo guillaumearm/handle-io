@@ -1,5 +1,7 @@
 import { both, pipe, equals, where, keys, length } from 'ramda';
 import { isFunction } from 'ramda-adjunct';
+
+import SimulatedThrow from '../src/internal/SimulatedThrow';
 import testHandler from '../src/testHandler';
 
 
@@ -102,7 +104,11 @@ describe('handle-io/testHandler', () => {
     const args1 = [1, 2, 3];
     const args2 = [4, 5, 6];
     const fakeHandler = createFakeHandler((runner) => {
-      expect(runner({ f: f1, args: args1 })).toBe('a');
+      try {
+        expect(runner({ f: f1, args: args1 })).toBe('a');
+      } catch (e) {
+        expect(e).toBe('error');
+      }
       expect(runner({ f: f1, args: args2 })).toBe('b');
       expect(runner({ f: f2, args: args1 })).toBe('c');
       expect(runner({ f: f2, args: args2 })).toBe('d');
@@ -119,7 +125,28 @@ describe('handle-io/testHandler', () => {
         .run()
     });
 
-    test('too much runned io', () => {
+    test('with SimulatedThrow (catched)', () => {
+      testHandler(fakeHandler)
+        .shouldReturn(42)
+        .matchIo({ f: f1, args: args1 }, new SimulatedThrow('error'))
+        .matchIo({ f: f1, args: args2 }, 'b')
+        .matchIo({ f: f2, args: args1 }, 'c')
+        .matchIo({ f: f2, args: args2 }, 'd')
+        .run()
+    });
+
+    test('with SimulatedThrow (not catched)', () => {
+      expect(() =>
+        testHandler(fakeHandler)
+          .matchIo({ f: f1, args: args1 }, 'a')
+          .matchIo({ f: f1, args: args2 }, 'b')
+          .matchIo({ f: f2, args: args1 }, 'c')
+          .matchIo({ f: f2, args: args2 }, new SimulatedThrow('error'))
+          .run()
+      ).toThrow('error');
+    });
+
+    test('too much io ran', () => {
       expect(() => testHandler(fakeHandler)
         .shouldReturn(42)
         .matchIo({ f: f1, args: args1 }, 'a')
@@ -129,7 +156,7 @@ describe('handle-io/testHandler', () => {
       ).toThrow('Too much runned io');
     });
 
-    test('not enough runner iuo', () => {
+    test('not enough io ran', () => {
       expect(() => testHandler(fakeHandler)
         .shouldReturn(42)
         .matchIo({ f: f1, args: args1 }, 'a')
