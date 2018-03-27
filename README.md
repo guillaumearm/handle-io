@@ -243,13 +243,13 @@ const myHandler = handler(function*() {
 
 ### How to test errors
 
-By default, all mocked **IOs** doesn't throw any error.
+By default, no mocked **IO** throws any error.
 
 It's possible to simulate throws with `testHandler` using the `simulateThrow` test utility.
 
-Writing tests for myHandler means handle two cases :
+Writing tests for myHandler means two cases need to be handled:
 
-- `ioError` did throw
+- when `ioError` throws:
 
 ```js
 testHandler(myHandler())
@@ -259,7 +259,7 @@ testHandler(myHandler())
   .run();
 ```
 
-- `ioError` didn't throw
+- when `ioError` doesn't throw:
 
 ```js
 testHandler(myHandler())
