@@ -3,7 +3,7 @@ import SimulatedThrow from './internal/SimulatedThrow';
 import isEqual from 'lodash.isequal';
 import { stringify } from './internal/utils';
 
-const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = false) => {
+export const createTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = false) => {
   if (typeof h !== 'function') {
     throw new Error('Handler should be a function')
   }
