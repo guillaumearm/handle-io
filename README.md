@@ -278,7 +278,7 @@ A custom `testHandler` can be created using `createTestHandler`.
 import { io, createTestHandler } from 'handle-io';
 
 
-const createCustomTestHandler = (h, mockedIOs, expectedRetValue, assertRet, constructor = createCustomTestHandler) => {
+const createCustomTestHandler = (h, mockedIOs = [], expectedRetValue, assertRet = false, constructor = createCustomTestHandler) => {
   return {
     ...createTestHandler(h, mockedIOs, expectedRetValue, assertRet, constructor),
     matchLog: (arg, ret) => constructor(
