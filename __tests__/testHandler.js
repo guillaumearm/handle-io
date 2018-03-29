@@ -153,7 +153,7 @@ describe('handle-io/testHandler', () => {
         .matchIo({ f: f1, args: args2 }, 'b')
         .matchIo({ f: f2, args: args1 }, 'c')
         .run()
-      ).toThrow('Too much runned io');
+      ).toThrow('Too much io ran');
     });
 
     test('not enough io ran', () => {
@@ -165,7 +165,7 @@ describe('handle-io/testHandler', () => {
         .matchIo({ f: f2, args: args2 }, 'd')
         .matchIo({ f: () => {}, args: [] }, 'x')
         .run()
-      ).toThrow('Not enough runned io');
+      ).toThrow('Not enough io ran');
     });
 
     test('invalid io function', () => {

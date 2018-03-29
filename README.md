@@ -268,5 +268,44 @@ testHandler(myHandler())
   .run();
 ```
 
+### Custom testHandler
+
+A custom `testHandler` can be created using `createTestHandler`.
+
+**e.g.**
+
+```js
+import { io, createTestHandler } from 'handle-io';
+
+
+const createCustomTestHandler = (h, mockedIOs, expectedRetValue, assertRet, constructor = createCustomTestHandler) => {
+  return {
+    ...createTestHandler(h, mockedIOs, expectedRetValue, assertRet, constructor),
+    matchLog: (arg, ret) => constructor(
+      h,
+      [...mockedIOs, [io(console.log)(arg), ret]],
+      expectedRetValue,
+      assertRet,
+      constructor,
+    ),
+  };
+};
+
+const customTestHandler = h => createCustomTestHandler(h);
+
+const log = io(console.log);
+const myHandler = handler(function*(value) {
+  yield log(value);
+  yield log(value);
+  return 42;
+});
+
+customTestHandler(myHandler('hello world'))
+  .shouldReturn(42)
+  .matchLog('hello world')
+  .matchLog('hello world')
+  .run()
+```
+
 ## License
 [MIT](https://github.com/guillaumearm/handle-io/blob/master/LICENSE)
