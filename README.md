@@ -40,6 +40,8 @@ This piece of code is an assertion, an error will be thrown if something goes wr
 npm install --save handle-io
 ```
 
+------
+
 ### IO
 
 io is just a wrapper for functions and arguments.
@@ -81,6 +83,8 @@ log.run();
 **Keep in mind**: pieces of code using `.run()` cannot be tested properly.
 
 The idea of this library is to apply an **IO** function inside a structure called **handler**.
+
+------
 
 ### Handlers
 A **handler** is a wrapped pure [generator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator) which just apply some **IO** function and/or **handler**.
@@ -142,6 +146,8 @@ Likewise, don't use handlers' **.run()** everywhere in your codebase.
 
 **handlers** are combinable together: **you can yield a handler**.
 
+------
+
 ### Promise support
 
 `handle-io` supports promises and allows you to create asynchronous IO.
@@ -176,6 +182,8 @@ sleepSecond(1).run().then((n) => {
   console.log(`${n} second(s) waited`);
 });
 ```
+
+------
 
 ### Dealing with errors
 
@@ -268,6 +276,8 @@ testHandler(myHandler())
   .run();
 ```
 
+------
+
 ### Custom testHandler
 
 A custom `testHandler` can be created using `createTestHandler`.
@@ -306,6 +316,15 @@ customTestHandler(myHandler('hello world'))
   .matchLog('hello world')
   .run()
 ```
+
+------
+
+## Use with [Redux](https://redux.js.org)
+
+There is a way to use `handler` as [redux middleware](https://redux.js.org/advanced/middleware).
+
+Please take a look to [redux-fun Handlers](https://github.com/guillaumearm/redux-fun#handlers).
+
 
 ## License
 [MIT](https://github.com/guillaumearm/handle-io/blob/master/LICENSE)
