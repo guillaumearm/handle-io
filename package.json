@@ -1,6 +1,6 @@
 {
   "name": "handle-io",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Wrap side effects, combine them, and make this combination testable",
   "main": "lib/handle-io.js",
   "module": "es/handle-io.js",
