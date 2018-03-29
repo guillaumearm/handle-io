@@ -1,3 +1,11 @@
+<a name="0.5.0"></a>
+# [0.5.0](https://github.com/guillaumearm/handle-io/compare/v0.4.1...v0.5.0) (2018-03-29)
+
+
+### Features
+
+* createTestHandler constructor can be extended ([#134](https://github.com/guillaumearm/handle-io/issues/134)) ([088184b](https://github.com/guillaumearm/handle-io/commit/088184b)), closes [#133](https://github.com/guillaumearm/handle-io/issues/133)
+
 <a name="0.4.1"></a>
 ## [0.4.1](https://github.com/guillaumearm/handle-io/compare/v0.4.0...v0.4.1) (2018-03-27)
 
