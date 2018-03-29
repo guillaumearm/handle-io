@@ -13,6 +13,7 @@ const testSuites = [
   require('./example-readme-addvalues'),
   require('./example-readme-promises'),
   require('./example-readme-errors'),
+  require('./example-readme-custom-testhandler'),
 ];
 
 const bundlePrefix = 'bundle-'
