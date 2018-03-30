@@ -1,3 +1,11 @@
+<a name="0.5.4"></a>
+## [0.5.4](https://github.com/guillaumearm/handle-io/compare/v0.5.3...v0.5.4) (2018-03-30)
+
+
+### Reverts
+
+* "ci(release): configure dont-crack semantic-release plugin ([#144](https://github.com/guillaumearm/handle-io/issues/144))" ([a0d795f](https://github.com/guillaumearm/handle-io/commit/a0d795f))
+
 <a name="0.5.3"></a>
 ## [0.5.3](https://github.com/guillaumearm/handle-io/compare/v0.5.2...v0.5.3) (2018-03-30)
 
