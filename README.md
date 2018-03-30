@@ -127,8 +127,8 @@ const addValues = handler(function*() {
 });
 
 testHandler(addValues())
-  .matchIo(getEnv('VALUE1'), 32),
-  .matchIo(getEnv('VALUE2'), 10),
+  .matchIo(getEnv('VALUE1'), 32)
+  .matchIo(getEnv('VALUE2'), 10)
   .shouldReturn(42)
   .run();
 ```
