@@ -85,7 +85,7 @@
     "ramda-adjunct": "2.6.0",
     "rimraf": "2.6.2",
     "rimraf-promise": "2.0.0",
-    "rollup": "0.57.1",
+    "rollup": "0.58.0",
     "rollup-plugin-commonjs": "9.1.0",
     "rollup-plugin-node-resolve": "3.3.0",
     "semantic-release": "15.1.7",
