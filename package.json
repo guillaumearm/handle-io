@@ -89,7 +89,7 @@
     "rollup-plugin-commonjs": "9.1.1",
     "rollup-plugin-node-resolve": "3.3.0",
     "semantic-release": "15.1.8",
-    "sinon": "5.0.0"
+    "sinon": "5.0.1"
   },
   "release": {
     "branch": "master",
