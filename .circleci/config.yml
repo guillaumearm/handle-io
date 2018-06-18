@@ -2,34 +2,6 @@
 
 version: 2
 jobs:
-  install:
-    docker:
-      - image: circleci/node:9
-    filters:
-      branches:
-        ignore: gh-pages
-    steps:
-      - checkout
-
-      # install latest npm version
-      - run: sudo npm install -g npm@latest
-
-      # install
-      - run: npm ci || npm install
-
-      # update lockfile
-      - run: npx greenkeeper-lockfile-update
-      - run: npm install
-
-      # upload lockfile
-      - run: npx greenkeeper-lockfile-upload
-
-      - save_cache:
-          paths:
-            - node_modules
-            - package-lock.json
-          key: handle-io-dependencies-{{ checksum "package-lock.json" }}
-
   build:
     docker:
       - image: circleci/node:9
@@ -40,10 +12,52 @@ jobs:
       - checkout
       - restore-cache:
           keys:
-            - handle-io-dependencies-{{ checksum "package-lock.json" }}
+            - handle-io-dependencies-{{ checksum "package.json" }}
 
-      # run build
+      # install latest npm version
+      - run: sudo npm install -g npm@latest
+
+      # install greenkeeper-lockfile
+      - run: sudo npm install -g greenkeeper-lockfile@latest
+
+      # update lockfile
+      - run:
+          command: npx greenkeeper-lockfile-update
+          environment:
+            GK_LOCK_COMMIT_AMEND: true
+
+      # install
+      - run: npm install
+
+      - save_cache:
+         paths:
+            - node_modules
+            - package-lock.json
+         key: handle-io-dependencies-{{ checksum "package.json" }}
+
+      # build
       - run: npm run build
+
+      # lint
+      - run: npm run lint
+
+      # test
+      - run: npm run test
+
+      # integration test
+      - run: npm run test:bundle
+
+      # run test:coverage
+      - run: npm run test:coverage
+
+      # run codecov
+      - run: npx codecov
+
+      # upload lockfile
+      - run:
+          command: npx greenkeeper-lockfile-upload
+          environment:
+            GK_LOCK_COMMIT_AMEND: true
 
       - store_artifacts:
           path: ./dist
@@ -52,20 +66,8 @@ jobs:
       - store_artifacts:
           path: ./es
 
-  unit_test:
-    docker:
-      - image: circleci/node:9
-    filters:
-      branches:
-        ignore: gh-pages
-    steps:
-      - checkout
-      - restore-cache:
-          keys:
-            - handle-io-dependencies-{{ checksum "package-lock.json" }}
 
-      # run test
-      - run: npm run test
+
 
   release:
     docker:
@@ -77,156 +79,17 @@ jobs:
       - checkout
       - restore-cache:
           keys:
-            - handle-io-dependencies-{{ checksum "package-lock.json" }}
+            - handle-io-dependencies-{{ checksum "package.json" }}
 
       # run semantic-release
       - run: npx semantic-release
-
-  code_coverage:
-    docker:
-      - image: circleci/node:9
-    filters:
-      branches:
-        ignore: gh-pages
-    steps:
-      - checkout
-      - restore-cache:
-          keys:
-            - handle-io-dependencies-{{ checksum "package-lock.json" }}
-
-      # run test:coverage
-      - run: npm run test:coverage
-
-      # run codecov
-      - run: npx codecov
-
-
-  style_test:
-    docker:
-      - image: circleci/node:9
-    filters:
-      branches:
-        ignore: gh-pages
-    steps:
-      - checkout
-      - restore-cache:
-          keys:
-            - handle-io-dependencies-{{ checksum "package-lock.json" }}
-
-      # run lint
-      - run: npm run lint
-
-  node6_bundle_test:
-    docker:
-      - image: circleci/node:6
-    filters:
-      branches:
-        ignore: gh-pages
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-          - handle-io-dependencies-{{ checksum "package-lock.json" }}
-
-      # run test:bundle
-      - run: npm run test:bundle
-
-
-  node7_bundle_test:
-    docker:
-      - image: circleci/node:7
-    filters:
-      branches:
-        ignore: gh-pages
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-          - handle-io-dependencies-{{ checksum "package-lock.json" }}
-
-      # run test:bundle
-      - run: npm run test:bundle
-
-
-  node8_bundle_test:
-    docker:
-      - image: circleci/node:8
-    filters:
-      branches:
-        ignore: gh-pages
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-          - handle-io-dependencies-{{ checksum "package-lock.json" }}
-
-      # run test:bundle
-      - run: npm run test:bundle
-
-
-  node9_bundle_test:
-    docker:
-      - image: circleci/node:9
-    filters:
-      branches:
-        ignore: gh-pages
-
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-          - handle-io-dependencies-{{ checksum "package-lock.json" }}
-
-      # run test:bundle
-      - run: npm run test:bundle
 
 
 workflows:
   version: 2
   build_test:
     jobs:
-      - install
-      - unit_test:
-          requires:
-            - install
-
-      - code_coverage:
-          requires:
-            - install
-
-      - style_test:
-          requires:
-            - install
-
-      - node6_bundle_test:
-          requires:
-            - install
-
-      - node7_bundle_test:
-          requires:
-            - install
-
-      - node8_bundle_test:
-          requires:
-            - install
-
-      - node9_bundle_test:
-          requires:
-            - install
-
-      - build:
-          requires:
-            - unit_test
-            - code_coverage
-            - style_test
-            - node6_bundle_test
-            - node7_bundle_test
-            - node8_bundle_test
-            - node9_bundle_test
-
+      - build
       - release:
           requires:
             - build
