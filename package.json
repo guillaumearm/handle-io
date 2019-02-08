@@ -79,7 +79,7 @@
     "expect.js": "0.3.1",
     "greenkeeper-lockfile": "1.15.1",
     "jest": "22.4.2",
-    "nodemon": "1.17.5",
+    "nodemon": "1.18.10",
     "markdownlint-cli": "0.10.0",
     "ramda": "0.25.0",
     "ramda-adjunct": "2.9.0",
