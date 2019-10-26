@@ -58,7 +58,7 @@
   "devDependencies": {
     "@semantic-release/changelog": "2.0.1",
     "@semantic-release/exec": "2.2.3",
-    "@semantic-release/git": "4.0.3",
+    "@semantic-release/git": "7.0.17",
     "async-describe": "1.2.0",
     "babel-cli": "6.26.0",
     "babel-core": "6.26.0",
