@@ -83,7 +83,7 @@
     "markdownlint-cli": "0.10.0",
     "ramda": "0.25.0",
     "ramda-adjunct": "2.9.0",
-    "rimraf": "2.6.2",
+    "rimraf": "3.0.2",
     "rimraf-promise": "2.0.0",
     "rollup": "0.60.7",
     "rollup-plugin-commonjs": "9.1.3",
